@@ -1,0 +1,1778 @@
+openapi: 3.0.0
+info:
+  title: Gnomi Consolidated API
+  version: 1.0.0
+  description: Spec generated from all HAR files with correct hosts per endpoint.
+paths:
+  /openchat/v2/chat/topics:
+    get:
+      tags:
+      - api.gnomi.ai
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        createdAt:
+                          type: string
+      servers:
+      - url: https://api.gnomi.ai
+  /openchat/v1/chat/:
+    get:
+      tags:
+      - api.gnomi.ai
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chats:
+                    type: array
+                    items: {}
+                  nextKey:
+                    type: string
+                    nullable: true
+      servers: &id001
+      - url: https://api.gnomi.ai
+    post:
+      tags:
+      - api.gnomi.ai
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: llmModel
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      servers: *id001
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+  /v2/account/login:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+  /v1/account/forget-password:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  code_target:
+                    type: string
+                  delivery_method:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+  /v1/account/confirm-forget-password:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirmation_code:
+                  type: string
+                password:
+                  type: string
+                username:
+                  type: string
+  /v1/ai-news/public/topics:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+      - url: https://api.gnomi.com
+  /v1/ai-news/public/interest:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                  status:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interest:
+                  type: string
+  /v1/ai-news/topics:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v2/news/feed/public:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        published:
+                          type: string
+                        added:
+                          type: string
+                        category_sub_category:
+                          type: string
+                        country_category_sub_category:
+                          type: string
+                        views:
+                          type: integer
+                        is_global:
+                          type: string
+                        country:
+                          type: string
+                        language:
+                          type: string
+                        top_stories_country:
+                          type: string
+                        category_sub:
+                          type: string
+                        top_stories:
+                          type: string
+                        publisher:
+                          type: string
+                        category:
+                          type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              link:
+                                type: string
+                              caption:
+                                type: string
+                        added_at:
+                          type: string
+                        link:
+                          type: string
+                        country_category:
+                          type: string
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        published_at:
+                          type: string
+                        title:
+                          type: string
+                        type:
+                          type: string
+                        body:
+                          type: string
+                        raw_text:
+                          type: string
+                        ingestion_id:
+                          type: string
+                        modified:
+                          type: string
+                        modified_at:
+                          type: string
+                        summary_translated:
+                          type: array
+                          items: {}
+                        title_translated:
+                          type: array
+                          items: {}
+                        tags:
+                          type: string
+                        interaction:
+                          type: object
+                          properties: {}
+                        user_reaction:
+                          type: string
+                          nullable: true
+                        is_video:
+                          type: string
+                        embed_link:
+                          type: string
+                          nullable: true
+                        publisher_favicon:
+                          type: string
+                        country_flag_icon:
+                          type: string
+                  lastkey:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v1/account/user-details:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_detail:
+                    type: object
+                    properties:
+                      created_at:
+                        type: string
+                      article_language:
+                        type: string
+                      given_name:
+                        type: string
+                      family_name:
+                        type: string
+                      email:
+                        type: string
+                      country:
+                        type: string
+                      app_language:
+                        type: string
+                      verified:
+                        type: boolean
+                      utm:
+                        type: object
+                        properties:
+                          M:
+                            type: object
+                            properties:
+                              utm_campaign:
+                                type: object
+                                properties:
+                                  'NULL':
+                                    type: boolean
+                              utm_source:
+                                type: object
+                                properties:
+                                  'NULL':
+                                    type: boolean
+                              utm_medium:
+                                type: object
+                                properties:
+                                  'NULL':
+                                    type: boolean
+                      updated_at:
+                        type: string
+                      user_id:
+                        type: string
+                      updated_at_ts:
+                        type: string
+                      profile_url:
+                        type: string
+                      created_at_ts:
+                        type: string
+                      username:
+                        type: string
+                      preferred_username:
+                        type: string
+                      privacy:
+                        type: string
+                  social_account:
+                    type: string
+                    nullable: true
+                  user:
+                    type: object
+                    properties:
+                      sub:
+                        type: string
+                      email_verified:
+                        type: string
+                      given_name:
+                        type: string
+                      family_name:
+                        type: string
+                      email:
+                        type: string
+      servers: &id002
+      - url: https://api.gnomi.com
+    put:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers: *id002
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile_url:
+                  type: string
+  /v1/article/bookmark-ids:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+      - url: https://api.gnomi.com
+  /gnomichat/v1/chat/:
+    get:
+      tags:
+      - api.gnomi.ai
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chats:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                        chatId:
+                          type: string
+                        topicId:
+                          type: string
+                          nullable: true
+                        articleId:
+                          type: string
+                          nullable: true
+                        type:
+                          type: string
+                        model:
+                          type: string
+                        title:
+                          type: string
+                        lastAnswer:
+                          type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                          nullable: true
+                  nextKey:
+                    type: string
+                    nullable: true
+      servers:
+      - url: https://api.gnomi.ai
+  /v1/notification/count:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unread_notifications:
+                    type: integer
+      servers:
+      - url: https://api.gnomi.com
+  /v1/notification/system/count:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unread_notifications:
+                    type: integer
+      servers:
+      - url: https://api.gnomi.com
+  /gnomichat/v2/chat/topics:
+    get:
+      tags:
+      - api.gnomi.ai
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        createdAt:
+                          type: string
+      servers:
+      - url: https://api.gnomi.ai
+  /v1/account/subscription:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v1/search/suggestion:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items: {}
+                  category:
+                    type: array
+                    items: {}
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                  keywords:
+                    type: array
+                    items:
+                      type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v1/search:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _index:
+                          type: string
+                        _id:
+                          type: string
+                        _score:
+                          type: number
+                        _source:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            added:
+                              type: string
+                            added_at:
+                              type: string
+                            author:
+                              type: string
+                            raw_text:
+                              type: string
+                            category:
+                              type: string
+                            category_sub:
+                              type: string
+                            country:
+                              type: string
+                            country_category:
+                              type: string
+                            country_category_sub_category:
+                              type: string
+                            category_sub_category:
+                              type: string
+                            description:
+                              type: string
+                            images:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  caption:
+                                    type: string
+                                  link:
+                                    type: string
+                            language:
+                              type: string
+                            link:
+                              type: string
+                            modified:
+                              type: string
+                            modified_at:
+                              type: string
+                            published:
+                              type: string
+                            published_at:
+                              type: string
+                            publisher:
+                              type: string
+                            tags:
+                              type: string
+                            title:
+                              type: string
+                            title_translated:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  text:
+                                    type: string
+                                  to:
+                                    type: string
+                            summary_translated:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  text:
+                                    type: string
+                                  to:
+                                    type: string
+                            type:
+                              type: string
+                            ingestion_id:
+                              type: string
+                            views:
+                              type: integer
+                        sort:
+                          type: array
+                          items:
+                            type: integer
+                  lastkey:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v1/news/feed/article:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: article_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: object
+                    properties:
+                      published:
+                        type: string
+                      title_translated:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            text:
+                              type: string
+                            to:
+                              type: string
+                      category_sub_category:
+                        type: string
+                      country:
+                        type: string
+                      language:
+                        type: string
+                      publisher:
+                        type: string
+                      id:
+                        type: string
+                      country_category:
+                        type: string
+                      modified:
+                        type: string
+                      published_at:
+                        type: string
+                      tags:
+                        type: object
+                        properties:
+                          'NULL':
+                            type: boolean
+                      body:
+                        type: string
+                      summary_translated:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            text:
+                              type: string
+                            to:
+                              type: string
+                      added:
+                        type: string
+                      views:
+                        type: integer
+                      country_category_sub_category:
+                        type: string
+                      raw_text:
+                        type: string
+                      modified_at:
+                        type: string
+                      category_sub:
+                        type: string
+                      ingestion_id:
+                        type: string
+                      category:
+                        type: string
+                      images:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            link:
+                              type: string
+                            caption:
+                              type: string
+                      link:
+                        type: string
+                      added_at:
+                        type: string
+                      description:
+                        type: string
+                      title:
+                        type: string
+                      type:
+                        type: string
+                      interaction:
+                        type: object
+                        properties: {}
+                      user_reaction:
+                        type: string
+                        nullable: true
+      servers:
+      - url: https://api.gnomi.com
+  /v1/article/bookmark:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers: &id003
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: string
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookmarks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        published:
+                          type: string
+                        title_translated:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              text:
+                                type: string
+                              to:
+                                type: string
+                        category_sub_category:
+                          type: string
+                        views_updated_on:
+                          type: string
+                        country:
+                          type: string
+                        language:
+                          type: string
+                        publisher:
+                          type: string
+                        id:
+                          type: string
+                        country_category:
+                          type: string
+                        modified:
+                          type: string
+                        published_at:
+                          type: string
+                        tags:
+                          type: object
+                          properties:
+                            'NULL':
+                              type: boolean
+                        body:
+                          type: string
+                        author:
+                          type: string
+                        summary_translated:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              text:
+                                type: string
+                              to:
+                                type: string
+                        added:
+                          type: string
+                        views:
+                          type: integer
+                        country_category_sub_category:
+                          type: string
+                        raw_text:
+                          type: string
+                        modified_at:
+                          type: string
+                        category_sub:
+                          type: string
+                        ingestion_id:
+                          type: string
+                        category:
+                          type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              link:
+                                type: string
+                              caption:
+                                type: string
+                        link:
+                          type: string
+                        added_at:
+                          type: string
+                        description:
+                          type: string
+                        title:
+                          type: string
+                        type:
+                          type: string
+                        interaction:
+                          type: object
+                          properties: {}
+                        user_reaction:
+                          type: string
+                          nullable: true
+      servers: *id003
+  /v1/article/interaction:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: string
+                time_spent:
+                  type: string
+                read_at:
+                  type: string
+  /v1/rank/profile:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  country:
+                    type: string
+                  user_current_rank:
+                    type: integer
+                  user_article_read_count:
+                    type: integer
+      servers:
+      - url: https://api.gnomi.com
+  /v1/account/app-social/count:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Follower:
+                    type: integer
+                  Following:
+                    type: integer
+                  Blocked:
+                    type: integer
+      servers:
+      - url: https://api.gnomi.com
+  /v1/article/engagement:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items: {}
+      servers:
+      - url: https://api.gnomi.com
+  /v1/account/sign-up/status:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  emailVerified:
+                    type: boolean
+                  profileCompleted:
+                    type: boolean
+                  emailRequiredDaysToGo:
+                    type: integer
+                  profileCompletionDaysToGo:
+                    type: integer
+      servers:
+      - url: https://api.gnomi.com
+  /v1/media-upload/initiate:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: media_for
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  upload_url:
+                    type: string
+                  object_key:
+                    type: string
+                  object_url:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v1/account/social:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                social:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      account:
+                        type: string
+                      name:
+                        type: string
+  /v1/account/update-user:
+    put:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                given_name:
+                  type: string
+                family_name:
+                  type: string
+                preferred_username:
+                  type: string
+  /v1/account/verification-request:
+    get:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verification_status:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+  /v1/account/change-password:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_password:
+                  type: string
+                old_password:
+                  type: string
+  /gnomichat/v1/chat/type/llm-models:
+    get:
+      tags:
+      - api.gnomi.ai
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  llmModels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        company:
+                          type: string
+                        uiLabel:
+                          type: string
+                        model:
+                          type: string
+                        description:
+                          type: string
+                        icon:
+                          type: string
+                        active:
+                          type: boolean
+      servers:
+      - url: https://api.gnomi.ai
+  /v1/account/signout/single-device:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+  /v2/account/sign-up:
+    post:
+      tags:
+      - api.gnomi.com
+      parameters:
+      - name: x-visitor-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://api.gnomi.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                app_language:
+                  type: string
+                article_language:
+                  type: string
+  /prod-v1/contact:
+    post:
+      tags:
+      - q0z8bciu32.execute-api.us-east-2.amazonaws.com
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      servers:
+      - url: https://q0z8bciu32.execute-api.us-east-2.amazonaws.com
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                message:
+                  type: string
+  /policy/Community_Guidelines+/English/Gnomi+Community+Guidelines+2.5.24+Final.html:
+    get:
+      tags:
+      - legal.gnomi.com
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+      - url: https://legal.gnomi.com
+  /policy/Privacy-Policy.html:
+    get:
+      tags:
+      - legal.gnomi.com
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+      - url: https://legal.gnomi.com
+  /policy/TERMS-OF-SERVICE.html:
+    get:
+      tags:
+      - legal.gnomi.com
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+      - url: https://legal.gnomi.com
+tags:
+- name: api.gnomi.ai
+- name: api.gnomi.com
+- name: legal.gnomi.com
+- name: q0z8bciu32.execute-api.us-east-2.amazonaws.com
+
